@@ -1,0 +1,325 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		38DFBEED1C1B108E00EF1503 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DFBEEC1C1B108E00EF1503 /* main.m */; };
+		38DFBEF01C1B108E00EF1503 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DFBEEF1C1B108E00EF1503 /* AppDelegate.m */; };
+		38DFBEF31C1B108E00EF1503 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DFBEF21C1B108E00EF1503 /* ViewController.m */; };
+		38DFBEF61C1B108E00EF1503 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38DFBEF41C1B108E00EF1503 /* Main.storyboard */; };
+		38DFBEF81C1B108E00EF1503 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38DFBEF71C1B108E00EF1503 /* Assets.xcassets */; };
+		38DFBEFB1C1B108E00EF1503 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38DFBEF91C1B108E00EF1503 /* LaunchScreen.storyboard */; };
+		38DFBF081C1B132100EF1503 /* IMDetectorStylesTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DFBF061C1B132100EF1503 /* IMDetectorStylesTextView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		38DFBEE81C1B108E00EF1503 /* IMDetectorStylesTextViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMDetectorStylesTextViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38DFBEEC1C1B108E00EF1503 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		38DFBEEE1C1B108E00EF1503 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		38DFBEEF1C1B108E00EF1503 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		38DFBEF11C1B108E00EF1503 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		38DFBEF21C1B108E00EF1503 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		38DFBEF51C1B108E00EF1503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		38DFBEF71C1B108E00EF1503 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		38DFBEFA1C1B108E00EF1503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		38DFBEFC1C1B108E00EF1503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38DFBF061C1B132100EF1503 /* IMDetectorStylesTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IMDetectorStylesTextView.m; path = IMDetectorStylesTextView/IMDetectorStylesTextView.m; sourceTree = "<group>"; };
+		38DFBF071C1B132100EF1503 /* IMDetectorStylesTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IMDetectorStylesTextView.h; path = IMDetectorStylesTextView/IMDetectorStylesTextView.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		38DFBEE51C1B108E00EF1503 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		38DFBEDF1C1B108E00EF1503 = {
+			isa = PBXGroup;
+			children = (
+				38DFBEEA1C1B108E00EF1503 /* IMDetectorStylesTextViewDemo */,
+				38DFBEE91C1B108E00EF1503 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		38DFBEE91C1B108E00EF1503 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38DFBEE81C1B108E00EF1503 /* IMDetectorStylesTextViewDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		38DFBEEA1C1B108E00EF1503 /* IMDetectorStylesTextViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				38DFBF091C1B133400EF1503 /* IMDetectorStylesTextView */,
+				38DFBEEE1C1B108E00EF1503 /* AppDelegate.h */,
+				38DFBEEF1C1B108E00EF1503 /* AppDelegate.m */,
+				38DFBEF11C1B108E00EF1503 /* ViewController.h */,
+				38DFBEF21C1B108E00EF1503 /* ViewController.m */,
+				38DFBEF41C1B108E00EF1503 /* Main.storyboard */,
+				38DFBEF71C1B108E00EF1503 /* Assets.xcassets */,
+				38DFBEF91C1B108E00EF1503 /* LaunchScreen.storyboard */,
+				38DFBEFC1C1B108E00EF1503 /* Info.plist */,
+				38DFBEEB1C1B108E00EF1503 /* Supporting Files */,
+			);
+			name = IMDetectorStylesTextViewDemo;
+			path = IMDetectorStylesTextView;
+			sourceTree = "<group>";
+		};
+		38DFBEEB1C1B108E00EF1503 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				38DFBEEC1C1B108E00EF1503 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38DFBF091C1B133400EF1503 /* IMDetectorStylesTextView */ = {
+			isa = PBXGroup;
+			children = (
+				38DFBF061C1B132100EF1503 /* IMDetectorStylesTextView.m */,
+				38DFBF071C1B132100EF1503 /* IMDetectorStylesTextView.h */,
+			);
+			name = IMDetectorStylesTextView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		38DFBEE71C1B108E00EF1503 /* IMDetectorStylesTextViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38DFBEFF1C1B108E00EF1503 /* Build configuration list for PBXNativeTarget "IMDetectorStylesTextViewDemo" */;
+			buildPhases = (
+				38DFBEE41C1B108E00EF1503 /* Sources */,
+				38DFBEE51C1B108E00EF1503 /* Frameworks */,
+				38DFBEE61C1B108E00EF1503 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IMDetectorStylesTextViewDemo;
+			productName = IMDetectorStylesTextView;
+			productReference = 38DFBEE81C1B108E00EF1503 /* IMDetectorStylesTextViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		38DFBEE01C1B108E00EF1503 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Ihar Mironenka";
+				TargetAttributes = {
+					38DFBEE71C1B108E00EF1503 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 38DFBEE31C1B108E00EF1503 /* Build configuration list for PBXProject "IMDetectorStylesTextViewDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 38DFBEDF1C1B108E00EF1503;
+			productRefGroup = 38DFBEE91C1B108E00EF1503 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				38DFBEE71C1B108E00EF1503 /* IMDetectorStylesTextViewDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38DFBEE61C1B108E00EF1503 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38DFBEFB1C1B108E00EF1503 /* LaunchScreen.storyboard in Resources */,
+				38DFBEF81C1B108E00EF1503 /* Assets.xcassets in Resources */,
+				38DFBEF61C1B108E00EF1503 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38DFBEE41C1B108E00EF1503 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38DFBEF31C1B108E00EF1503 /* ViewController.m in Sources */,
+				38DFBF081C1B132100EF1503 /* IMDetectorStylesTextView.m in Sources */,
+				38DFBEF01C1B108E00EF1503 /* AppDelegate.m in Sources */,
+				38DFBEED1C1B108E00EF1503 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		38DFBEF41C1B108E00EF1503 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38DFBEF51C1B108E00EF1503 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		38DFBEF91C1B108E00EF1503 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38DFBEFA1C1B108E00EF1503 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		38DFBEFD1C1B108E00EF1503 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		38DFBEFE1C1B108E00EF1503 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		38DFBF001C1B108E00EF1503 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IMDetectorStylesTextView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.IMDetectorStylesTextViewDemo;
+				PRODUCT_NAME = IMDetectorStylesTextViewDemo;
+			};
+			name = Debug;
+		};
+		38DFBF011C1B108E00EF1503 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IMDetectorStylesTextView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.IMDetectorStylesTextViewDemo;
+				PRODUCT_NAME = IMDetectorStylesTextViewDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		38DFBEE31C1B108E00EF1503 /* Build configuration list for PBXProject "IMDetectorStylesTextViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38DFBEFD1C1B108E00EF1503 /* Debug */,
+				38DFBEFE1C1B108E00EF1503 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38DFBEFF1C1B108E00EF1503 /* Build configuration list for PBXNativeTarget "IMDetectorStylesTextViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38DFBF001C1B108E00EF1503 /* Debug */,
+				38DFBF011C1B108E00EF1503 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 38DFBEE01C1B108E00EF1503 /* Project object */;
+}
