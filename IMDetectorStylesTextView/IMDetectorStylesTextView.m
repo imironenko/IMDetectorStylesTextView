@@ -29,16 +29,31 @@
 #define STYLE_TEXT_COLOR_DEFAULT			[UIColor blueColor]
 #define STYLE_TEXT_COLOR_HIGHLIGHT_DEFAULT  [UIColor redColor]
 
+NSString *const kIMDetectorTypeRegExp[IMDetectorTypeAll] = {
+	[IMDetectorTypeHashtag]	= @"#\\w[[:alnum:]_]*",
+	[IMDetectorTypeMention]	= @"@\\w[[:alnum:]_]*",
+	[IMDetectorTypeLink]	= @"((mailto:|(news|(ht|f)tp(s?))://){1}\\S+)"
+};
+
 @interface IMDetectorStylesTextView()
 
 @property (nonatomic, strong) NSMutableDictionary *attributesNormal;
 @property (nonatomic, strong) NSMutableDictionary *attributesHighlight;
 
+@property (nonatomic, strong) NSAttributedString *originalAttributedText;
+/// @brief attributed text after parsing the specified types
 @property (nonatomic, strong) NSAttributedString *backupAttributedText;
 @property (nonatomic) IMDetectorEntity *activityEntity;
 
-@property (nonatomic, strong) NSMutableDictionary *entitiesDictionary; // value is subclass of IMDetectorEntity instance, key is NSRange
-@property (nonatomic, strong) NSMutableDictionary *manuallyAddedEntities;
+/// @brief value is subclass of IMDetectorEntity instance, key is NSRange
+@property (nonatomic, strong) NSMutableDictionary *entitiesDictionary;
+
+- (void)setStylesForDetectorTypes:(IMDetectorType)detectorTypes normalStateAttributes:(NSDictionary *)normalAttributes highlightStateAttributes:(NSDictionary *)highlightAttributes forseUpdatedStyles:(BOOL)isForseUpdatedStyles;
+- (IMDetectorEntity *)detectorEntityForDetectorType:(IMDetectorType)detectorType withDisplayText:(NSString *)displayText range:(NSRange)range;
+- (NSValue *)attributedTextRangeValueForPoint:(CGPoint)point;
+- (void)configureNormalState;
+- (NSDictionary *)attributesNormalForType:(IMDetectorType)detectorType;
+- (NSDictionary *)attributesHighlightForType:(IMDetectorType)detectorType;
 
 @end
 
@@ -79,43 +94,28 @@
 	NSDictionary *styleNormalDefault = @{NSForegroundColorAttributeName: STYLE_TEXT_COLOR_DEFAULT};
 	NSDictionary *styleHighlightDefault = @{NSForegroundColorAttributeName: STYLE_TEXT_COLOR_HIGHLIGHT_DEFAULT};
 
-	[self.attributesNormal setObject:styleNormalDefault forKey:@(IMDetectorTypeHashtag)];
-	[self.attributesHighlight setObject:styleHighlightDefault forKey:@(IMDetectorTypeHashtag)];
-
-	[self.attributesNormal setObject:styleNormalDefault forKey:@(IMDetectorTypeMention)];
-	[self.attributesHighlight setObject:styleHighlightDefault forKey:@(IMDetectorTypeMention)];
-
-	[self.attributesNormal setObject:styleNormalDefault forKey:@(IMDetectorTypeLink)];
-	[self.attributesHighlight setObject:styleHighlightDefault forKey:@(IMDetectorTypeLink)];
+	[self setStylesForDetectorType:IMDetectorTypeAll normalStateAttributes:styleNormalDefault highlightStateAttributes:styleHighlightDefault];
 }
 
-#pragma - General methods
+#pragma mark - Public methods
 
 - (void)setStylesForDetectorType:(IMDetectorType)detectorType normalStateAttributes:(NSDictionary *)normalAttributes highlightStateAttributes:(NSDictionary *)highlightAttributes {
-	IMDetectorType types[3] = {IMDetectorTypeHashtag, IMDetectorTypeMention, IMDetectorTypeLink};
-
-	for (NSInteger i = 0; i < 3; i++) {
-		IMDetectorType type = types[i];
-
-		if ((detectorType & type) == type) {
-			[self.attributesNormal setObject:normalAttributes forKey:@(type)];
-			[self.attributesHighlight setObject:highlightAttributes forKey:@(type)];
-
-			[self updateStylesForType:type];
-		}
-	}
+	[self setStylesForDetectorTypes:detectorType normalStateAttributes:normalAttributes highlightStateAttributes:highlightAttributes forseUpdatedStyles:YES];
 }
 
 - (void)setDetectorEntity:(IMDetectorEntity *)entity forSubstring:(NSString *)substring {
 	NSRange range = [self.attributedText.string rangeOfString:substring];
+	entity.range = range;
 	[self setDetectorEntity:entity forRange:range];
 }
 
 - (void)setDetectorEntity:(IMDetectorEntity *)entity forRange:(NSRange)range {
+	NSAssert(entity, @"the entity parameter should not be nil");
+
 	IMDetectorType type = [entity.class detectorType];
 
 	NSAttributedString *originalAttributedText = self.attributedText;
-	NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:originalAttributedText];
+	NSMutableAttributedString *mutableAttributedString = [originalAttributedText mutableCopy];
 	[mutableAttributedString addAttributes:[self attributesNormalForType:type] range:range];
 
 	[self.entitiesDictionary setObject:entity forKey:[NSValue valueWithRange:range]];
@@ -136,51 +136,48 @@
 	[super setAttributedText:attributedText];
 
 	if (isNewText) {
+		self.originalAttributedText = attributedText;
+
+		// update text styles (parsing #hashtag, @mentions and URLs)
 		IMDetectorType currentType = self.detectorTypes;
-		self.detectorTypes = currentType; // update
+		self.detectorTypes = currentType;
 	}
 }
 
 - (void)setDetectorTypes:(IMDetectorType)detectorType {
 	NSAttributedString *originalAttributedText = self.attributedText;
-	NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:originalAttributedText];
+
+	if (!originalAttributedText || !self.attributesNormal || !self.attributesHighlight) {
+		return;
+	}
+
+	NSMutableAttributedString *mutableAttributedString = [originalAttributedText mutableCopy];
 
 	void(^wordsDetection)(IMDetectorType type, NSString *regexPattern) = ^void(IMDetectorType type, NSString *regexPattern) {
 		NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:regexPattern
 																		  options:NSRegularExpressionCaseInsensitive
 																			error:nil];
 
-		NSRange range = NSMakeRange(0, originalAttributedText.length);
+		NSRange range = NSMakeRange(0, mutableAttributedString.length);
 
-		[regex enumerateMatchesInString:originalAttributedText.string options:kNilOptions range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		[regex enumerateMatchesInString:mutableAttributedString.string options:kNilOptions range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
 
 			NSRange substringRange = [result rangeAtIndex:0];
 			[mutableAttributedString addAttributes:[self attributesNormalForType:type] range:substringRange];
 
-			NSString *substring = [originalAttributedText attributedSubstringFromRange:substringRange].string;
+			NSString *substring = [mutableAttributedString attributedSubstringFromRange:substringRange].string;
 
 			IMDetectorEntity *entity = [self detectorEntityForDetectorType:type withDisplayText:substring range:substringRange];
 			[self.entitiesDictionary setObject:entity forKey:[NSValue valueWithRange:substringRange]];
 		}];
 
 	};
-	if ((detectorType & IMDetectorTypeHashtag) == IMDetectorTypeHashtag) {
-		wordsDetection(IMDetectorTypeHashtag, @"#\\w[[:alnum:]_]*");
-	}
 
-	if ((detectorType & IMDetectorTypeMention) == IMDetectorTypeMention) {
-		wordsDetection(IMDetectorTypeMention, @"@\\w[[:alnum:]_]*");
-	}
-
-	if ((detectorType & IMDetectorTypeLink) == IMDetectorTypeLink) {
-		wordsDetection(IMDetectorTypeLink, @"((mailto:|(news|(ht|f)tp(s?))://){1}\\S+)");
-	}
+	wordsDetection(IMDetectorTypeHashtag, kIMDetectorTypeRegExp[IMDetectorTypeHashtag]);
+	wordsDetection(IMDetectorTypeMention, kIMDetectorTypeRegExp[IMDetectorTypeMention]);
+	wordsDetection(IMDetectorTypeLink, kIMDetectorTypeRegExp[IMDetectorTypeLink]);
 
 	self.attributedText = mutableAttributedString;
-}
-
-- (NSArray *)entities {
-	return [self.entitiesDictionary allValues];
 }
 
 - (void)setActivityEntity:(IMDetectorEntity *)activityEntity {
@@ -193,7 +190,7 @@
 	if (activityEntity) {
 		NSRange range = [activityEntity range];
 
-		NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+		NSMutableAttributedString *attributedString = [self.attributedText mutableCopy];
 
 		IMDetectorType detectorType = [self.activityEntity.class detectorType];
 		NSDictionary *highlightAttributes = [self attributesHighlightForType:detectorType];
@@ -204,6 +201,10 @@
 			self.attributedText = attributedString;
 		} completion:nil];
 	}
+}
+
+- (NSArray *)entities {
+	return [self.entitiesDictionary allValues];
 }
 
 #pragma mark - Event Handler
@@ -247,6 +248,39 @@
 
 #pragma mark - Private methods
 
+- (void)setStylesForDetectorTypes:(IMDetectorType)detectorTypes normalStateAttributes:(NSDictionary *)normalAttributes highlightStateAttributes:(NSDictionary *)highlightAttributes forseUpdatedStyles:(BOOL)isForseUpdatedStyles {
+	IMDetectorType types[3] = {IMDetectorTypeHashtag, IMDetectorTypeMention, IMDetectorTypeLink};
+
+	for (NSInteger i = 0; i < 3; i++) {
+		IMDetectorType type = types[i];
+
+		if ((detectorTypes & type) == type) {
+			NSArray *entities = [self entitiesForDetecorType:type];
+			NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
+
+			// remove the custom attributes, set origi
+			for (IMDetectorEntity *entity in entities) {
+				NSAttributedString *originalAttributedSubstring = [self.originalAttributedText attributedSubstringFromRange:entity.range];
+
+				[mutableAttributedString replaceCharactersInRange:entity.range withAttributedString:originalAttributedSubstring];
+			}
+
+			// save new attributes
+			[self.attributesNormal setObject:normalAttributes forKey:@(type)];
+			[self.attributesHighlight setObject:highlightAttributes forKey:@(type)];
+
+			// add the new attributes
+			for (IMDetectorEntity *entity in entities) {
+				[mutableAttributedString addAttributes:[self attributesNormalForType:type] range:entity.range];
+			}
+
+			if (isForseUpdatedStyles) {
+				self.attributedText = mutableAttributedString;
+			}
+		}
+	}
+}
+
 - (IMDetectorEntity *)detectorEntityForDetectorType:(IMDetectorType)detectorType withDisplayText:(NSString *)displayText range:(NSRange)range {
 	IMDetectorEntity *entity;
 	switch (detectorType) {
@@ -269,7 +303,7 @@
 - (NSValue *)attributedTextRangeValueForPoint:(CGPoint)point {
 	NSLayoutManager *layoutManager = self.layoutManager;
 
-	// find the tapped character location and compare it 
+	// find the tapped character location and compare it
 	CGPoint locationOfTouch = point;
 	locationOfTouch.x -= self.textContainerInset.left;
 	locationOfTouch.y -= self.textContainerInset.top;
@@ -284,18 +318,6 @@
 	}
 
 	return nil;
-}
-
-- (void)updateStylesForType:(IMDetectorType)detectorType {
-	NSArray *entities = [self entitiesForDetecorType:detectorType];
-
-	NSAttributedString *originalAttributedText = self.attributedText;
-	NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:originalAttributedText];
-	for (IMDetectorEntity *entity in entities) {
-		[mutableAttributedString addAttributes:[self attributesNormalForType:detectorType] range:[entity range]];
-	}
-
-	self.attributedText = mutableAttributedString;
 }
 
 - (void)configureNormalState {
@@ -390,7 +412,7 @@
 
 @end
 
-#pragma mark - 
+#pragma mark -
 
 @implementation IMDetectorLinkEntity
 

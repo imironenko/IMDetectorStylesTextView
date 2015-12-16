@@ -18,20 +18,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bSX-Mt-Bk8" customClass="IMDetectorStylesTextView">
-                                <rect key="frame" x="0.0" y="67" width="600" height="533"/>
+                                <rect key="frame" x="0.0" y="67" width="600" height="448"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, #sed do eiusmod tempor #incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud \exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. @Duis #aute irure dolor in reprehenderit in voluptate velit esse cillum http://dolore.com eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, https://sunt.com/dsda in culpa qui officia deserunt mollit anim id est laborum. @Nam liber te conscient to factor tum poen legum #odioque civiuda.</string>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, #sed do eiusmod tempor #incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. @Duis #aute irure dolor in reprehenderit in voluptate velit esse cillum http://dolore.com eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, https://sunt.com/dsda in culpa qui officia deserunt mollit anim id est laborum. @Nam liber te conscient to factor tum poen legum #odioque civiuda.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7a-0S-8KH">
+                                <rect key="frame" x="256" y="542" width="88" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.339143319" green="0.67532327589999996" blue="0.72265625" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="egB-61-MZg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="URLs"/>
+                                <connections>
+                                    <action selector="linkStylesButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tm2-dp-61K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nab-5m-4Dq">
+                                <rect key="frame" x="492" y="542" width="88" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.339143319" green="0.67532327589999996" blue="0.72265625" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="AJn-O0-3Dg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="@mention"/>
+                                <connections>
+                                    <action selector="mentionStylesButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k2q-vB-kxf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-ut-By1">
+                                <rect key="frame" x="20" y="542" width="88" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.33914331896551725" green="0.67532327586206897" blue="0.72265625" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="Ltx-gR-JND"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="#hashtag"/>
+                                <connections>
+                                    <action selector="hashtagStylesButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oan-lx-6QW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nab-5m-4Dq" secondAttribute="trailing" constant="20" id="7jc-JB-bMu"/>
+                            <constraint firstItem="Y7a-0S-8KH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8ka-Oa-LOs"/>
+                            <constraint firstItem="nab-5m-4Dq" firstAttribute="top" secondItem="bSX-Mt-Bk8" secondAttribute="bottom" constant="27" id="DVz-UI-Iul"/>
+                            <constraint firstItem="UYD-ut-By1" firstAttribute="top" secondItem="bSX-Mt-Bk8" secondAttribute="bottom" constant="27" id="Sd3-bm-C7Y"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Y7a-0S-8KH" secondAttribute="bottom" constant="28" id="WD1-px-K4y"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UYD-ut-By1" secondAttribute="bottom" constant="28" id="YE4-dE-0u0"/>
                             <constraint firstItem="bSX-Mt-Bk8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kJ2-wc-gqE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nab-5m-4Dq" secondAttribute="bottom" constant="28" id="kiM-ZM-kWD"/>
+                            <constraint firstItem="UYD-ut-By1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="lcQ-d5-ODh"/>
                             <constraint firstAttribute="trailing" secondItem="bSX-Mt-Bk8" secondAttribute="trailing" id="s4d-Q2-G0P"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bSX-Mt-Bk8" secondAttribute="bottom" id="wc4-Z1-LhD"/>
+                            <constraint firstItem="Y7a-0S-8KH" firstAttribute="top" secondItem="bSX-Mt-Bk8" secondAttribute="bottom" constant="27" id="tD8-1G-GX8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bSX-Mt-Bk8" secondAttribute="bottom" constant="85" id="wc4-Z1-LhD"/>
                             <constraint firstItem="bSX-Mt-Bk8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="47" id="yHE-8Y-u0I"/>
                         </constraints>
                     </view>
