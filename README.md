@@ -8,6 +8,16 @@ Just download the archive and add the IMDetectorStylesTextView folder your Xcode
 ### Example usage
 
 ```objc
+	// disable the UITextView selectable and editable properties
+	self.textView.selectable = NO;
+	self.textView.editable = NO;
+
+	// define an attributed string
+	NSString *text = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, #sed do eiusmod tempor #incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. @Duis #aute irure dolor in reprehenderit in voluptate velit esse cillum http://dolore.com eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, https://sunt.com/dsda in culpa qui officia deserunt mollit anim id est laborum. @Nam liber te conscient to factor tum poen legum #odioque civiuda.";
+
+	NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.]};
+	self.textView.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+
 	// set the types of data
 	[self.textView setDetectorTypes:IMDetectorTypeAll];
 
